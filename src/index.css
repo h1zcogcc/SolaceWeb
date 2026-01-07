@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Solace Egypt Design System - Warm Desert Heritage */
+
+@layer base {
+  :root {
+    /* Core Desert Palette */
+    --background: 35 35% 97%;
+    --foreground: 20 25% 15%;
+    
+    /* Warm Sand & Cream */
+    --card: 38 40% 95%;
+    --card-foreground: 20 25% 15%;
+    
+    --popover: 38 40% 95%;
+    --popover-foreground: 20 25% 15%;
+    
+    /* Terracotta Primary - Inspired by Dribbble */
+    --primary: 10 45% 50%;
+    --primary-foreground: 38 40% 97%;
+    
+    /* Soft Sand Secondary */
+    --secondary: 38 35% 88%;
+    --secondary-foreground: 20 25% 20%;
+    
+    /* Warm Muted Tones */
+    --muted: 35 25% 90%;
+    --muted-foreground: 20 15% 45%;
+    
+    /* Golden Accent - Egyptian Gold */
+    --accent: 42 65% 55%;
+    --accent-foreground: 20 25% 12%;
+    
+    /* Warm Rose Destructive */
+    --destructive: 350 65% 55%;
+    --destructive-foreground: 38 40% 97%;
+    
+    /* Soft Borders */
+    --border: 35 20% 85%;
+    --input: 35 25% 88%;
+    --ring: 10 45% 50%;
+    
+    --radius: 0.75rem;
+    
+    /* Extended Palette */
+    --sand: 38 45% 85%;
+    --sand-light: 40 50% 92%;
+    --sand-dark: 35 35% 75%;
+    
+    --gold: 42 70% 50%;
+    --gold-muted: 42 55% 65%;
+    
+    --terracotta: 10 50% 48%;
+    --terracotta-light: 12 45% 60%;
+    --terracotta-dark: 8 55% 35%;
+    
+    --clay: 20 40% 35%;
+    --clay-light: 22 35% 50%;
+    
+    --nile: 175 35% 45%;
+    --nile-muted: 175 25% 55%;
+    
+    --night: 350 70% 8%;
+    --dusk: 350 40% 15%;
+    
+    /* Sidebar */
+    --sidebar-background: 35 35% 95%;
+    --sidebar-foreground: 20 25% 15%;
+    --sidebar-primary: 10 45% 50%;
+    --sidebar-primary-foreground: 38 40% 97%;
+    --sidebar-accent: 38 35% 88%;
+    --sidebar-accent-foreground: 20 25% 20%;
+    --sidebar-border: 35 20% 85%;
+    --sidebar-ring: 10 45% 50%;
+    
+    /* Gradient Definitions */
+    --gradient-sunset: linear-gradient(135deg, hsl(42 70% 50%) 0%, hsl(10 50% 48%) 50%, hsl(350 40% 15%) 100%);
+    --gradient-sand: linear-gradient(180deg, hsl(38 45% 85%) 0%, hsl(35 35% 97%) 100%);
+    --gradient-dusk: linear-gradient(135deg, hsl(350 40% 15%) 0%, hsl(10 50% 48% / 0.3) 100%);
+    --gradient-gold: linear-gradient(90deg, hsl(42 70% 50%) 0%, hsl(42 55% 65%) 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(20 25% 15% / 0.08);
+    --shadow-elevated: 0 8px 30px -8px hsl(20 25% 15% / 0.12);
+    --shadow-glow: 0 0 40px hsl(42 70% 50% / 0.2);
+  }
+
+  .dark {
+    --background: 350 70% 6%;
+    --foreground: 38 40% 92%;
+    
+    --card: 350 50% 10%;
+    --card-foreground: 38 40% 92%;
+    
+    --popover: 350 50% 10%;
+    --popover-foreground: 38 40% 92%;
+    
+    --primary: 42 65% 55%;
+    --primary-foreground: 350 70% 8%;
+    
+    --secondary: 350 40% 18%;
+    --secondary-foreground: 38 40% 90%;
+    
+    --muted: 350 35% 15%;
+    --muted-foreground: 35 20% 60%;
+    
+    --accent: 10 45% 50%;
+    --accent-foreground: 38 40% 95%;
+    
+    --destructive: 350 65% 45%;
+    --destructive-foreground: 38 40% 95%;
+    
+    --border: 350 30% 20%;
+    --input: 350 30% 18%;
+    --ring: 42 65% 55%;
+    
+    --sidebar-background: 350 70% 8%;
+    --sidebar-foreground: 38 40% 92%;
+    --sidebar-primary: 42 65% 55%;
+    --sidebar-primary-foreground: 350 70% 8%;
+    --sidebar-accent: 350 40% 18%;
+    --sidebar-accent-foreground: 38 40% 90%;
+    --sidebar-border: 350 30% 20%;
+    --sidebar-ring: 42 65% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Islamic Geometric Pattern Overlay */
+  .pattern-islamic {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='%23C8A04A' stroke-opacity='0.08' stroke-width='0.5'/%3E%3Cpath d='M30 10L50 30L30 50L10 30Z' fill='none' stroke='%23C8A04A' stroke-opacity='0.05' stroke-width='0.5'/%3E%3C/svg%3E");
+  }
+  
+  /* Arch Shape Decorations */
+  .arch-border {
+    border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+  }
+  
+  .arch-frame {
+    clip-path: polygon(0 20%, 50% 0, 100% 20%, 100% 100%, 0 100%);
+  }
+  
+  /* Decorative Line */
+  .line-ornate {
+    @apply relative;
+  }
+  
+  .line-ornate::before,
+  .line-ornate::after {
+    content: '✧';
+    @apply absolute text-gold text-sm;
+  }
+  
+  .line-ornate::before {
+    left: 0;
+  }
+  
+  .line-ornate::after {
+    right: 0;
+  }
+  
+  /* Section Label */
+  .section-label {
+    @apply inline-flex items-center gap-2 text-sm font-medium tracking-widest uppercase;
+    color: hsl(var(--terracotta-light));
+    letter-spacing: 0.2em;
+  }
+  
+  .section-label::before,
+  .section-label::after {
+    content: '';
+    @apply w-8 h-px;
+    background: linear-gradient(90deg, transparent, hsl(var(--gold)) 50%, transparent);
+  }
+  
+  /* Card Hover Effects */
+  .card-hover {
+    @apply transition-all duration-500;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-elevated);
+  }
+  
+  /* Glow Effect */
+  .glow-gold {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Text Gradient */
+  .text-gradient-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-sunset {
+    background: var(--gradient-sunset);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer utilities {
+  /* Animation Utilities */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .animate-float-delayed {
+    animation: float 6s ease-in-out 2s infinite;
+  }
+  
+  .animate-pulse-soft {
+    animation: pulse-soft 4s ease-in-out infinite;
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  
+  .animate-rise {
+    animation: rise 1s ease-out forwards;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  @keyframes pulse-soft {
+    0%, 100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+  
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Parallax Layers */
+  .parallax-slow {
+    will-change: transform;
+  }
+  
+  .parallax-medium {
+    will-change: transform;
+  }
+  
+  .parallax-fast {
+    will-change: transform;
+  }
+}
