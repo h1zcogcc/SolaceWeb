@@ -7,30 +7,51 @@ import { DomeOutline } from '@/components/icons/IslamicPatterns';
 const packages = [
   {
     name: 'Standard',
-    badge: 'Launch Offer',
-    originalPrice: '£1,200',
-    price: '£600',
+    badge: null,
+    price: '£1,200',
     description: 'Perfect for getting started with your Arabic and Quran journey',
     features: [
       'Arabic classes at reputable markaz',
       'Quran classes (tajwīd & memorisation)',
-      'Airport pickup and drop-off',
       'Shared accommodation in Cairo',
       'Daily lunch and dinner',
       'Weekly excursions and activities',
-      '24-hour student helpdesk',
       'On-ground support team',
     ],
     cta: 'Reserve Standard',
     featured: false,
+    bestValue: false,
+  },
+  {
+    name: 'Enhanced',
+    badge: null,
+    floatingBadge: 'Popular Choice',
+    price: '£2,800',
+    description: 'Upgraded comfort with additional learning support',
+    features: [
+      'All Standard package features',
+      'Airport pickup and drop-off',
+      '24-hour student helpdesk',
+      'Semi-private accommodation (2 students)',
+      'Extra weekly Quran session',
+      'Bi-weekly excursions',
+      'Priority helpdesk response',
+      'Free Egypt Study Guide (digital)',
+    ],
+    cta: 'Reserve Enhanced',
+    featured: false,
+    bestValue: false,
   },
   {
     name: 'Premium',
-    badge: 'Coming Soon',
-    price: 'From £3,200',
+    badge: null,
+    floatingBadge: null,
+    originalPrice: '£4,000',
+    price: '£3,200',
+    limitedTime: true,
     description: 'The complete immersive experience with premium amenities',
     features: [
-      'All Standard package features',
+      'All Standard and Enhanced package features',
       'Private accommodation option',
       'Premium markaz placement',
       'One-on-one Quran sessions',
@@ -40,8 +61,9 @@ const packages = [
       'Personalized study plan',
       'Certificate of completion',
     ],
-    cta: 'Coming Soon',
+    cta: 'Reserve Premium',
     featured: true,
+    bestValue: true,
   },
 ];
 
@@ -61,7 +83,7 @@ const PackageCard = ({
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: index * 0.2 }}
-      className={`relative rounded-3xl p-8 ${
+      className={`relative rounded-3xl p-8 pt-10 ${
         pkg.featured 
           ? 'bg-gradient-to-br from-terracotta-dark via-terracotta to-terracotta-light text-primary-foreground shadow-xl' 
           : 'bg-card shadow-soft border border-border'
@@ -72,27 +94,76 @@ const PackageCard = ({
         <DomeOutline className="w-16 h-12" />
       </div>
 
+      {/* Floating Badge (Best Value or Popular Choice) */}
+      {pkg.bestValue && (
+        <div className="absolute -top-3 inset-x-0 flex justify-center z-10">
+          <motion.div 
+            initial={{ y: -10, opacity: 0 }}
+            animate={isInView ? { y: 0, opacity: 1 } : {}}
+            transition={{ duration: 0.5, delay: index * 0.2 + 0.3 }}
+            whileHover={{ scale: 1.05 }}
+            className="px-4 py-1 bg-gold text-terracotta-dark text-xs font-bold rounded-full shadow-lg cursor-default hover:shadow-xl transition-shadow"
+          >
+            <motion.span
+              animate={{ opacity: [1, 0.7, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              ✨
+            </motion.span>{' '}
+            Best Value
+          </motion.div>
+        </div>
+      )}
+      {'floatingBadge' in pkg && pkg.floatingBadge && (
+        <div className="absolute -top-3 inset-x-0 flex justify-center z-10">
+          <motion.div 
+            initial={{ y: -10, opacity: 0 }}
+            animate={isInView ? { y: 0, opacity: 1 } : {}}
+            transition={{ duration: 0.5, delay: index * 0.2 + 0.3 }}
+            whileHover={{ scale: 1.05 }}
+            className="px-4 py-1 bg-sand text-terracotta text-xs font-bold rounded-full shadow-lg flex items-center gap-1 cursor-default hover:shadow-xl transition-shadow"
+          >
+            <motion.div
+              animate={{ rotate: [0, 15, -15, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Sparkles className="w-3 h-3" />
+            </motion.div>
+            {pkg.floatingBadge}
+          </motion.div>
+        </div>
+      )}
+
       {/* Badge */}
-      <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium mb-4 ${
-        pkg.featured 
-          ? 'bg-gold/30 text-gold' 
-          : 'bg-sand text-terracotta'
-      }`}>
-        <Sparkles className="w-3 h-3" />
-        {pkg.badge}
-      </div>
+      {pkg.badge && (
+        <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium mb-4 ${
+          pkg.featured 
+            ? 'bg-gold/30 text-gold' 
+            : 'bg-sand text-terracotta'
+        }`}>
+          <Sparkles className="w-3 h-3" />
+          {pkg.badge}
+        </div>
+      )}
 
       {/* Name & Price */}
       <h3 className="text-3xl font-semibold mb-2">{pkg.name}</h3>
-      <div className="flex items-baseline gap-2 mb-4">
-        {'originalPrice' in pkg && pkg.originalPrice && (
-          <span className={`text-lg line-through ${pkg.featured ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
-            {pkg.originalPrice}
+      <div className="flex flex-col mb-4">
+        <div className="flex items-baseline gap-2">
+          {'originalPrice' in pkg && pkg.originalPrice && (
+            <span className={`text-lg line-through ${pkg.featured ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+              {pkg.originalPrice}
+            </span>
+          )}
+          <span className={`text-4xl font-bold ${pkg.featured ? 'text-gold' : 'text-terracotta'}`}>
+            {pkg.price}
+          </span>
+        </div>
+        {'limitedTime' in pkg && pkg.limitedTime && (
+          <span className={`text-xs font-medium mt-1 ${pkg.featured ? 'text-gold' : 'text-terracotta'}`}>
+            🔥 Limited time offer
           </span>
         )}
-        <span className={`text-4xl font-bold ${pkg.featured ? 'text-gold' : 'text-terracotta'}`}>
-          {pkg.price}
-        </span>
       </div>
 
       <p className={`mb-6 ${pkg.featured ? 'text-primary-foreground/80' : 'text-muted-foreground'}`}>
@@ -124,21 +195,26 @@ const PackageCard = ({
         ))}
       </ul>
 
-      {/* CTA */}
-      <Button
-        variant={pkg.featured ? 'gold' : 'hero'}
-        size="lg"
-        className="w-full group"
-        disabled={pkg.badge === 'Coming Soon'}
-      >
-        {pkg.cta}
-        {pkg.badge !== 'Coming Soon' && (
+        {/* CTA */}
+        <Button
+          variant={pkg.featured ? 'gold' : 'hero'}
+          size="lg"
+          className="w-full group"
+        >
+          {pkg.cta}
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        )}
-      </Button>
-    </motion.div>
-  );
-};
+        </Button>
+
+        {/* Finance & Discount Labels */}
+        <div className={`text-center text-xs mt-3 space-y-1 ${pkg.featured ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
+          <p>💳 Flexible payment plans available</p>
+          <p>💕 Couples: Buy 1, get 2nd 20% off</p>
+          <p>👥 Groups of 3+? <a href="#contact" className={`font-medium hover:underline ${pkg.featured ? 'text-gold' : 'text-terracotta'}`}>Get in touch</a></p>
+        </div>
+      </motion.div>
+    );
+  };
+
 
 export const PackagesSection = () => {
   const headerRef = useRef(null);
@@ -163,8 +239,8 @@ export const PackagesSection = () => {
             Choose Your Journey
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
-            Standard or Premium?{' '}
-            <span className="text-gradient-gold">Both Paths Lead to Growth</span>
+            Find Your Perfect Fit{' '}
+            <span className="text-gradient-gold">& Begin Your Journey</span>
           </h2>
           <p className="mt-4 text-muted-foreground">
             Select the programme that best fits your needs and budget. Both packages provide 
@@ -173,11 +249,11 @@ export const PackagesSection = () => {
         </motion.div>
 
         {/* Packages Grid */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {packages.map((pkg, index) => (
             <PackageCard key={pkg.name} pkg={pkg} index={index} />
           ))}
-        </div>
+      </div>
       </div>
     </section>
   );

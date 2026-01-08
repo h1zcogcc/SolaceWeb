@@ -77,8 +77,9 @@ export const AboutSection = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-center lg:text-left"
           >
-            <span className="section-label mb-4">
+            <span className="section-label mb-4 justify-center lg:justify-start">
               Our Story
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight mb-6">
@@ -97,10 +98,12 @@ export const AboutSection = () => {
               </p>
             </div>
 
-            <Button variant="heroOutline" size="lg" className="group">
-              Read Our Story
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            <div className="flex justify-center lg:justify-start">
+              <Button variant="heroOutline" size="lg" className="group">
+                Read Our Story
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
           </motion.div>
         </div>
       </div>
