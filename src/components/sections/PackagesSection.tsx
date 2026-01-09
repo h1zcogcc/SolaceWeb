@@ -1,14 +1,17 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Check, ArrowRight, Sparkles } from 'lucide-react';
+import { Check, ArrowRight, Sparkles, ShoppingCart } from 'lucide-react';
 import { DomeOutline } from '@/components/icons/IslamicPatterns';
+import { useBasket } from '@/contexts/BasketContext';
+import { toast } from 'sonner';
 
 const packages = [
   {
     name: 'Standard',
     badge: null,
     price: '£1,200',
+    priceNum: 1200,
     description: 'Perfect for getting started with your Arabic and Quran journey',
     features: [
       'Arabic classes at reputable markaz',
@@ -18,15 +21,17 @@ const packages = [
       'Weekly excursions and activities',
       'On-ground support team',
     ],
-    cta: 'Reserve Standard',
+    cta: 'Add to Basket',
     featured: false,
     bestValue: false,
+    showExtras: false,
   },
   {
     name: 'Enhanced',
     badge: null,
     floatingBadge: 'Popular Choice',
     price: '£2,800',
+    priceNum: 2800,
     description: 'Upgraded comfort with additional learning support',
     features: [
       'All Standard package features',
@@ -38,9 +43,10 @@ const packages = [
       'Priority helpdesk response',
       'Free Egypt Study Guide (digital)',
     ],
-    cta: 'Reserve Enhanced',
+    cta: 'Add to Basket',
     featured: false,
     bestValue: false,
+    showExtras: true,
   },
   {
     name: 'Premium',
@@ -48,6 +54,7 @@ const packages = [
     floatingBadge: null,
     originalPrice: '£4,000',
     price: '£3,200',
+    priceNum: 3200,
     limitedTime: true,
     description: 'The complete immersive experience with premium amenities',
     features: [
@@ -61,9 +68,10 @@ const packages = [
       'Personalized study plan',
       'Certificate of completion',
     ],
-    cta: 'Reserve Premium',
+    cta: 'Add to Basket',
     featured: true,
     bestValue: true,
+    showExtras: true,
   },
 ];
 
@@ -76,6 +84,26 @@ const PackageCard = ({
 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const { addItem, items } = useBasket();
+
+  const handleAddToBasket = () => {
+    // Check if user already has a different package
+    const existingPackageTypes = new Set(items.map(item => item.packageName));
+    
+    if (existingPackageTypes.size > 0 && !existingPackageTypes.has(pkg.name)) {
+      toast.error('You can only add one type of package', {
+        description: 'Remove items from your basket to switch packages.',
+      });
+      return;
+    }
+
+    addItem(pkg.name, pkg.priceNum);
+    toast.success(`${pkg.name} Package added!`, {
+      description: pkg.showExtras && items.filter(i => i.packageName === pkg.name).length >= 1
+        ? '💕 Couples discount will apply at checkout!'
+        : undefined,
+    });
+  };
 
   return (
     <motion.div
@@ -195,25 +223,29 @@ const PackageCard = ({
         ))}
       </ul>
 
-        {/* CTA */}
-        <Button
-          variant={pkg.featured ? 'gold' : 'hero'}
-          size="lg"
-          className="w-full group"
-        >
-          {pkg.cta}
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </Button>
+      {/* CTA */}
+      <Button
+        variant={pkg.featured ? 'gold' : 'hero'}
+        size="lg"
+        className="w-full group"
+        onClick={handleAddToBasket}
+      >
+        <ShoppingCart className="w-4 h-4 mr-2" />
+        {pkg.cta}
+        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+      </Button>
 
-        {/* Finance & Discount Labels */}
+      {/* Finance & Discount Labels - Only for Enhanced and Premium */}
+      {pkg.showExtras && (
         <div className={`text-center text-xs mt-3 space-y-1 ${pkg.featured ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
           <p>💳 Flexible payment plans available</p>
-          <p>💕 Couples: Buy 1, get 2nd 20% off</p>
+          <p>💕 Couples: Buy 1, get 2nd {pkg.name === 'Enhanced' ? '10%' : '15%'} off</p>
           <p>👥 Groups of 3+? <a href="#contact" className={`font-medium hover:underline ${pkg.featured ? 'text-gold' : 'text-terracotta'}`}>Get in touch</a></p>
         </div>
-      </motion.div>
-    );
-  };
+      )}
+    </motion.div>
+  );
+};
 
 
 export const PackagesSection = () => {
@@ -253,7 +285,7 @@ export const PackagesSection = () => {
           {packages.map((pkg, index) => (
             <PackageCard key={pkg.name} pkg={pkg} index={index} />
           ))}
-      </div>
+        </div>
       </div>
     </section>
   );

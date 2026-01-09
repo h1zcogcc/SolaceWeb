@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
+import { BasketDrawer } from '@/components/basket/BasketDrawer';
 import solaceLogo from '@/assets/solace-logo.png';
 
 const navItems = [
@@ -62,20 +63,24 @@ export const Header = () => {
           ))}
         </nav>
 
-        {/* CTA Button */}
-        <div className="hidden md:block">
-          <Button variant="hero" size="lg">
-            Register Interest
+        {/* CTA & Basket */}
+        <div className="hidden md:flex items-center gap-4">
+          <BasketDrawer />
+          <Button variant="hero" size="lg" asChild>
+            <a href="#contact">Get Started</a>
           </Button>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden p-2 text-foreground"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile Menu Toggle & Basket */}
+        <div className="md:hidden flex items-center gap-2">
+          <BasketDrawer />
+          <button
+            className="p-2 text-foreground"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -101,8 +106,8 @@ export const Header = () => {
                   {item.label}
                 </motion.a>
               ))}
-              <Button variant="hero" size="lg" className="mt-4">
-                Register Interest
+              <Button variant="hero" size="lg" className="mt-4" asChild>
+                <a href="#contact">Get Started</a>
               </Button>
             </nav>
           </motion.div>

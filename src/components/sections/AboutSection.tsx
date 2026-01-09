@@ -77,28 +77,30 @@ export const AboutSection = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-center lg:text-left"
+            className="text-center"
           >
-            <span className="section-label mb-4 justify-center lg:justify-start">
-              Our Story
-            </span>
+            <div className="flex justify-center">
+              <span className="section-label mb-4">
+                Our Story
+              </span>
+            </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight mb-6">
               Built on Trust,{' '}
               <span className="text-gradient-gold">Rooted in Purpose</span>
             </h2>
             <div className="space-y-4 text-muted-foreground mb-8">
               <p>
-                Solace Egypt was founded to provide international Muslim students with a structured, 
+                Solace Egypt was founded to provide international Muslim students with a structured,
                 safe, and spiritually enriching pathway to Arabic and Quran mastery.
               </p>
               <p>
-                We handle every detail so you can focus on what matters most — your learning and growth. 
-                From accommodation to classes, meals to excursions, we've built a comprehensive 
+                We handle every detail so you can focus on what matters most — your learning and growth.
+                From accommodation to classes, meals to excursions, we've built a comprehensive
                 support system that makes studying in Egypt accessible and rewarding.
               </p>
             </div>
 
-            <div className="flex justify-center lg:justify-start">
+            <div className="flex justify-center">
               <Button variant="heroOutline" size="lg" className="group">
                 Read Our Story
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
