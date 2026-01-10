@@ -1,8 +1,9 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Users, Star, Clock } from 'lucide-react';
+import { ArrowRight, Users, Star, Clock, Heart } from 'lucide-react';
 import { ArchFrame } from '@/components/icons/IslamicPatterns';
+import { FloatingStar, FloatingCrescent } from '@/components/decorations/FloatingElements';
 
 const stats = [
   { icon: Users, label: 'Growing', sublabel: 'Student Community' },
@@ -19,6 +20,11 @@ export const AboutSection = () => {
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-gold/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-terracotta/5 rounded-full blur-3xl" />
+      
+      {/* Floating decorations */}
+      <FloatingStar className="top-[8%] right-[12%]" delay={0.5} size="md" />
+      <FloatingStar className="bottom-[15%] left-[8%]" delay={2} size="lg" />
+      <FloatingCrescent className="top-[30%] left-[3%]" delay={1} />
 
       <div className="container mx-auto px-4 relative">
         <div className="grid lg:grid-cols-2 gap-16 items-center">

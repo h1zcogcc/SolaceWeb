@@ -35,13 +35,13 @@ const packages = [
     description: 'Upgraded comfort with additional learning support',
     features: [
       'All Standard package features',
+      'Economy flights included',
       'Airport pickup and drop-off',
       '24-hour student helpdesk',
       'Semi-private accommodation (2 students)',
       'Extra weekly Quran session',
       'Bi-weekly excursions',
       'Priority helpdesk response',
-      'Free Egypt Study Guide (digital)',
     ],
     cta: 'Add to Basket',
     featured: false,
@@ -59,12 +59,12 @@ const packages = [
     description: 'The complete immersive experience with premium amenities',
     features: [
       'All Standard and Enhanced package features',
+      'Business class flights included',
       'Private accommodation option',
       'Premium markaz placement',
       'One-on-one Quran sessions',
       'Extended excursion programme',
       'Priority support access',
-      'Free Egypt Study Guide (digital)',
       'Personalized study plan',
       'Certificate of completion',
     ],
@@ -286,6 +286,16 @@ export const PackagesSection = () => {
             <PackageCard key={pkg.name} pkg={pkg} index={index} />
           ))}
         </div>
+
+        {/* Donation Message */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="text-center text-muted-foreground mt-10 text-sm font-medium"
+        >
+          🇵🇸 10% of all proceeds donated to Palestine.
+        </motion.p>
       </div>
     </section>
   );

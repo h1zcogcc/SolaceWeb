@@ -1,7 +1,8 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { FloatingStar, FloatingDots } from '@/components/decorations/FloatingElements';
 
 const testimonials = [
   {
@@ -39,6 +40,12 @@ export const TestimonialsSection = () => {
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-sand/20 to-background" />
       
+      {/* Floating decorations */}
+      <FloatingStar className="top-[10%] left-[5%]" delay={0} size="md" />
+      <FloatingStar className="top-[20%] right-[8%]" delay={2} size="sm" />
+      <FloatingDots className="bottom-[15%] left-[10%]" />
+      <FloatingStar className="bottom-[20%] right-[5%]" delay={1} size="lg" />
+      
       <div className="container mx-auto px-4 relative">
         {/* Section Header */}
         <motion.div
@@ -74,11 +81,32 @@ export const TestimonialsSection = () => {
               transition={{ duration: 0.5 }}
               className="bg-card rounded-3xl p-8 md:p-12 shadow-soft text-center pt-16"
             >
-              {/* Avatar */}
-              <div className="w-20 h-20 rounded-full bg-terracotta/10 border-2 border-terracotta/30 flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl font-serif font-bold text-terracotta">
-                  {testimonials[activeIndex].initial}
-                </span>
+              {/* Avatar with animated ring */}
+              <div className="relative w-20 h-20 mx-auto mb-6">
+                <motion.div
+                  className="absolute inset-0 rounded-full border-2 border-gold/30"
+                  animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                />
+                <div className="w-20 h-20 rounded-full bg-terracotta/10 border-2 border-terracotta/30 flex items-center justify-center">
+                  <span className="text-3xl font-serif font-bold text-terracotta">
+                    {testimonials[activeIndex].initial}
+                  </span>
+                </div>
+              </div>
+
+              {/* 5-star rating */}
+              <div className="flex justify-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.1 * i }}
+                  >
+                    <Star className="w-5 h-5 fill-gold text-gold" />
+                  </motion.div>
+                ))}
               </div>
 
               {/* Name */}
