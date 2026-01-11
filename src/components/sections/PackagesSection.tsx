@@ -1,7 +1,8 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Check, ArrowRight, Sparkles, ShoppingCart } from 'lucide-react';
+import { Check, ArrowRight, Sparkles, ShoppingCart, Info } from 'lucide-react';
 import { DomeOutline } from '@/components/icons/IslamicPatterns';
 import { useBasket } from '@/contexts/BasketContext';
 import { toast } from 'sonner';
@@ -223,17 +224,35 @@ const PackageCard = ({
         ))}
       </ul>
 
-      {/* CTA */}
-      <Button
-        variant={pkg.featured ? 'gold' : 'hero'}
-        size="lg"
-        className="w-full group"
-        onClick={handleAddToBasket}
-      >
-        <ShoppingCart className="w-4 h-4 mr-2" />
-        {pkg.cta}
-        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-      </Button>
+      {/* CTA Buttons */}
+      <div className="space-y-3">
+        <Button
+          variant={pkg.featured ? 'gold' : 'hero'}
+          size="lg"
+          className="w-full group"
+          onClick={handleAddToBasket}
+        >
+          <ShoppingCart className="w-4 h-4 mr-2" />
+          {pkg.cta}
+          <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+        </Button>
+        
+        <Link to={`/packages/${pkg.name.toLowerCase()}`} className="block">
+          <Button
+            variant="outline"
+            size="lg"
+            className={`w-full group ${
+              pkg.featured 
+                ? 'border-gold/60 text-gold bg-gold/10 hover:bg-gold/20 hover:text-gold hover:border-gold' 
+                : ''
+            }`}
+          >
+            <Info className="w-4 h-4 mr-2" />
+            More Information
+            <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </Link>
+      </div>
 
       {/* Finance & Discount Labels - Only for Enhanced and Premium */}
       {pkg.showExtras && (

@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Play, ArrowRight } from 'lucide-react';
+import { Play, ArrowRight, Camera } from 'lucide-react';
 import cairoMosqueHero from '@/assets/cairo-mosque-hero.jpg';
 
 export const HeroSection = () => {
@@ -84,6 +84,17 @@ export const HeroSection = () => {
               >
                 <Play className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
                 Watch Video
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="rounded-full bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white hover:text-gray-900 px-6 py-5 text-sm group"
+                asChild
+              >
+                <a href="/gallery">
+                  <Camera className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
+                  View Gallery
+                </a>
               </Button>
               <Button 
                 size="lg" 

@@ -1,7 +1,8 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Users, Star, Clock, Heart } from 'lucide-react';
+import { ArrowRight, Users, Star, Clock } from 'lucide-react';
 import { ArchFrame } from '@/components/icons/IslamicPatterns';
 import { FloatingStar, FloatingCrescent } from '@/components/decorations/FloatingElements';
 
@@ -107,10 +108,12 @@ export const AboutSection = () => {
             </div>
 
             <div className="flex justify-center">
-              <Button variant="heroOutline" size="lg" className="group">
-                Read Our Story
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <Link to="/about">
+                <Button variant="heroOutline" size="lg" className="group">
+                  Read Our Story
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
             </div>
           </motion.div>
         </div>
