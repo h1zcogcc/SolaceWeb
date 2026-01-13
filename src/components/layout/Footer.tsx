@@ -155,17 +155,17 @@ export const Footer = () => {
         {/* Supported Payment Methods */}
         <div className="mb-8">
           <p className="text-center text-sm text-primary-foreground/60 mb-4">Supported Payment Methods</p>
-          <div className="flex justify-center items-center gap-6">
+          <div className="flex justify-center items-center gap-3 md:gap-6 flex-wrap">
             {paymentMethods.map((method) => (
               <div 
                 key={method.name}
-                className="bg-white rounded-lg p-2 flex items-center justify-center h-10 w-16"
+                className="bg-white rounded-lg p-1.5 md:p-2 flex items-center justify-center h-8 md:h-10 w-12 md:w-16"
                 title={method.name}
               >
                 <img 
                   src={method.logo} 
                   alt={method.name} 
-                  className="h-6 w-auto object-contain"
+                  className="h-4 md:h-6 w-auto object-contain"
                 />
               </div>
             ))}

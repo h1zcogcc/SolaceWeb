@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Play, ArrowRight, Camera } from 'lucide-react';
 import cairoMosqueHero from '@/assets/cairo-mosque-hero.jpg';
@@ -18,7 +19,7 @@ export const HeroSection = () => {
     <section 
       ref={containerRef}
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-[100svh] flex items-center overflow-hidden"
     >
       {/* Full-bleed Background Image with Parallax */}
       <motion.div 
@@ -31,13 +32,13 @@ export const HeroSection = () => {
           className="w-full h-full object-cover"
         />
         {/* Gradient Overlays for readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent md:from-black/60 md:via-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
       </motion.div>
 
       {/* Content */}
       <motion.div 
-        className="container mx-auto px-4 relative z-10 pt-32 pb-20"
+        className="container mx-auto px-4 relative z-10 pt-24 md:pt-32 pb-16 md:pb-20"
         style={{ opacity }}
       >
         <div className="max-w-xl">
@@ -46,14 +47,14 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="bg-black/30 backdrop-blur-sm rounded-2xl p-8"
+            className="bg-black/30 backdrop-blur-sm rounded-2xl p-5 md:p-8"
           >
             {/* Main Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 text-white"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-3 md:mb-4 text-white"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
               Your Complete Path to Arabic & Quran Mastery.
@@ -64,7 +65,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-base md:text-lg text-white/80 mb-6 leading-relaxed"
+              className="text-sm sm:text-base md:text-lg text-white/80 mb-5 md:mb-6 leading-relaxed"
             >
               Studying and living in Cairo made simple for international Muslim students. 
               Meals, Accommodation, Classes, and Support — all included.
@@ -75,12 +76,12 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row gap-3"
             >
               <Button 
                 size="lg" 
                 variant="outline"
-                className="rounded-full bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white hover:text-gray-900 px-6 py-5 text-sm group"
+                className="rounded-full bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white hover:text-gray-900 px-5 py-4 md:px-6 md:py-5 text-sm group"
               >
                 <Play className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
                 Watch Video
@@ -88,45 +89,48 @@ export const HeroSection = () => {
               <Button 
                 size="lg" 
                 variant="outline"
-                className="rounded-full bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white hover:text-gray-900 px-6 py-5 text-sm group"
+                className="rounded-full bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white hover:text-gray-900 px-5 py-4 md:px-6 md:py-5 text-sm group"
                 asChild
               >
-                <a href="/gallery">
+                <Link to="/gallery">
                   <Camera className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
                   View Gallery
-                </a>
+                </Link>
               </Button>
               <Button 
                 size="lg" 
-                className="rounded-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-5 text-sm shadow-lg shadow-blue-500/25 group"
+                className="rounded-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-5 py-4 md:px-6 md:py-5 text-sm shadow-lg shadow-blue-500/25 group"
+                asChild
               >
-                Register
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                <Link to="/get-started">
+                  Get Started
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </Button>
             </motion.div>
           </motion.div>
         </div>
       </motion.div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - Hidden on mobile */}
       <motion.div
-        className="absolute bottom-8 right-8 z-10 flex items-center gap-3"
+        className="absolute bottom-6 md:bottom-8 right-4 md:right-8 z-10 hidden sm:flex items-center gap-3"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
       >
-        <span className="text-white/60 text-sm tracking-widest uppercase" style={{ writingMode: 'vertical-rl' }}>
+        <span className="text-white/60 text-xs md:text-sm tracking-widest uppercase" style={{ writingMode: 'vertical-rl' }}>
           Scroll Down
         </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-8 h-12 border-2 border-white/40 rounded-full flex items-start justify-center p-2"
+          className="w-7 h-10 md:w-8 md:h-12 border-2 border-white/40 rounded-full flex items-start justify-center p-2"
         >
           <motion.div
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="w-1.5 h-1.5 bg-white rounded-full"
+            className="w-1 h-1 md:w-1.5 md:h-1.5 bg-white rounded-full"
           />
         </motion.div>
       </motion.div>

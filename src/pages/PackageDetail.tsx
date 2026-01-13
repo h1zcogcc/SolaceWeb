@@ -8,17 +8,43 @@ import { useBasket } from '@/contexts/BasketContext';
 import { toast } from 'sonner';
 
 const packageDetails = {
+  basic: {
+    name: 'Basic',
+    emoji: '📚',
+    duration: '2 Weeks',
+    price: '£750',
+    priceNum: 750,
+    overview: 'A focused introduction to Arabic and Qur\'an studies in Cairo, perfect for those with limited time who want a meaningful immersion experience.',
+    weeklyStructure: [
+      { icon: BookOpen, text: 'Arabic classes: 4–5 days per week' },
+      { icon: BookOpen, text: 'Qur\'an classes: 4–5 sessions per week (tajwīd & memorisation)' },
+      { icon: MapPin, text: 'Excursion: 1 cultural trip included' },
+      { icon: Users, text: 'Support: On-ground team available daily' },
+    ],
+    activities: [
+      'Islamic Cairo walking tour',
+      'Local mosque visits',
+      'Cultural orientation session',
+    ],
+    outcome: 'A solid introduction to Qur\'an recitation and basic Arabic, with initial exposure to Cairo\'s Islamic heritage.',
+    features: [
+      'Arabic classes at reputable markaz',
+      'Quran classes (tajwīd & memorisation)',
+      '1 Excursion',
+      'On-ground support team',
+    ],
+  },
   standard: {
     name: 'Standard',
     emoji: '🕌',
     duration: '1 Month',
     price: '£1,200',
     priceNum: 1200,
-    overview: 'Designed for students getting started with Arabic and Qur\'an in Cairo, combining structured study with light cultural immersion and weekly excursions.',
+    overview: 'Designed for students getting started with Arabic and Qur\'an in Cairo, combining structured study with light cultural immersion and bi-weekly excursions.',
     weeklyStructure: [
       { icon: BookOpen, text: 'Arabic classes: 4–5 days per week' },
       { icon: BookOpen, text: 'Qur\'an classes: 4–5 sessions per week (tajwīd & memorisation)' },
-      { icon: MapPin, text: 'Excursions: 1 per week' },
+      { icon: MapPin, text: 'Excursions: Bi-weekly (2 per month)' },
       { icon: Users, text: 'Support: On-ground team available daily' },
     ],
     activities: [
@@ -33,7 +59,7 @@ const packageDetails = {
       'Quran classes (tajwīd & memorisation)',
       'Shared accommodation in Cairo',
       'Daily lunch and dinner',
-      'Weekly excursions and activities',
+      'Bi-weekly excursions',
       'On-ground support team',
     ],
   },
@@ -142,7 +168,7 @@ export default function PackageDetail() {
 
     addItem(pkg.name, pkg.priceNum);
     toast.success(`${pkg.name} Package added!`, {
-      description: pkg.name !== 'Standard' && items.filter(i => i.packageName === pkg.name).length >= 1
+      description: (pkg.name === 'Enhanced' || pkg.name === 'Premium') && items.filter(i => i.packageName === pkg.name).length >= 1
         ? '💕 Couples discount will apply at checkout!'
         : undefined,
     });
@@ -329,7 +355,7 @@ export default function PackageDetail() {
           </motion.div>
 
           {/* Extra Info */}
-          {pkg.name !== 'Standard' && (
+          {(pkg.name === 'Enhanced' || pkg.name === 'Premium') && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

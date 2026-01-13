@@ -9,6 +9,23 @@ import { toast } from 'sonner';
 
 const packages = [
   {
+    name: 'Basic',
+    badge: null,
+    price: '£750',
+    priceNum: 750,
+    description: 'A focused introduction to Arabic and Quran studies',
+    features: [
+      'Arabic classes at reputable markaz',
+      'Quran classes (tajwīd & memorisation)',
+      '1 Excursion',
+      'On-ground support team',
+    ],
+    cta: 'Add to Basket',
+    featured: false,
+    bestValue: false,
+    showExtras: false,
+  },
+  {
     name: 'Standard',
     badge: null,
     price: '£1,200',
@@ -19,7 +36,7 @@ const packages = [
       'Quran classes (tajwīd & memorisation)',
       'Shared accommodation in Cairo',
       'Daily lunch and dinner',
-      'Weekly excursions and activities',
+      'Bi-weekly excursions',
       'On-ground support team',
     ],
     cta: 'Add to Basket',
@@ -300,7 +317,7 @@ export const PackagesSection = () => {
         </motion.div>
 
         {/* Packages Grid */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {packages.map((pkg, index) => (
             <PackageCard key={pkg.name} pkg={pkg} index={index} />
           ))}

@@ -9,6 +9,7 @@ import Checkout from "./pages/Checkout";
 import PackageDetail from "./pages/PackageDetail";
 import Gallery from "./pages/Gallery";
 import About from "./pages/About";
+import GetStarted from "./pages/GetStarted";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/packages/:packageName" element={<PackageDetail />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/about" element={<About />} />
+            <Route path="/get-started" element={<GetStarted />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
